@@ -416,55 +416,67 @@
                 <div class="org-tree">
                     <div class="position-box prime-minister" onclick="showDetail('prime-minister')">
                         <div class="position-title">内閣総理大臣</div>
-                        <div class="position-holder vacant">小島 亮太</div>
+                        <div class="position-holder active">小島 亮太</div>
                     </div>
                     <div class="connector-line"></div>
                     <div class="children-container">
                         <div class="ministry-group">
                             <div class="position-box minister" onclick="showDetail('finance')">
                                 <div class="position-title">財務大臣</div>
-                                <div class="position-holder vacant">大堀 壮介</div>
+                                <div class="position-holder active">大堀 壮介</div>
+                                
+                                <div class="ministry-group">
+                            <div class="position-box minister" onclick="showDetail('justice')">
+                                <div class="position-title">税務大臣</div>
+                                <div class="position-holder active">加藤 優人</div>
                             </div>
-                            <div class="bureau-list">
-                                <div class="bureau-box" onclick="showDetail('tax-bureau')">税務局</div>
-                                <div class="bureau-box" onclick="showDetail('budget-bureau')">予算局</div>
-                                <div class="bureau-box" onclick="showDetail('treasury')">国庫管理局</div>
+                            
+                        </div>
                             </div>
                         </div>
 
                         <div class="ministry-group">
                             <div class="position-box minister" onclick="showDetail('justice')">
                                 <div class="position-title">法務大臣</div>
-                                <div class="position-holder vacant">梶尾 悠喜</div>
-                            </div>
-                            <div class="bureau-list">
-                                <div class="bureau-box" onclick="showDetail('legal-bureau')">法制局</div>
-                                <div class="bureau-box" onclick="showDetail('prosecution')">検察局</div>
+                                <div class="position-holder active">梶尾 悠喜</div>
                             </div>
                         </div>
 
                         <div class="ministry-group">
                             <div class="position-box minister" onclick="showDetail('land')">
                                 <div class="position-title">国土開発大臣</div>
-                                <div class="position-holder vacant">甲斐 風音</div>
+                                <div class="position-holder active">甲斐 風音</div>
                             </div>
-                            <div class="bureau-list">
-                                <div class="bureau-box" onclick="showDetail('construction')">公共事業局</div>
-                                <div class="bureau-box" onclick="showDetail('building')">建築許可局</div>
-                                <div class="bureau-box" onclick="showDetail('land-mgmt')">土地管理局</div>
-                            </div>
+                          
                         </div>
 
                         <div class="ministry-group">
                             <div class="position-box minister" onclick="showDetail('resource')">
                                 <div class="position-title">環境大臣</div>
-                                <div class="position-holder vacant">吉高神 司庵</div>
+                                <div class="position-holder active">吉高神 司庵</div>
                             </div>
-                            <div class="bureau-list">
-                                <div class="bureau-box" onclick="showDetail('resource-bureau')">資源管理局</div>
-                                <div class="bureau-box" onclick="showDetail('environment')">環境保護局</div>
-                                <div class="bureau-box" onclick="showDetail('mining')">採掘監督局</div>
+                            
+                            <div class="ministry-group">
+                            <div class="position-box minister" onclick="showDetail('justice')">
+                                <div class="position-title">国土管理保全大臣</div>
+                                <div class="position-holder active">宮崎 将光</div>
                             </div>
+                        </div>
+                            
+                            <div class="ministry-group">
+                            <div class="position-box minister" onclick="showDetail('justice')">
+                                <div class="position-title">税務大臣</div>
+                                <div class="position-holder active">加藤 優人</div>
+                            </div>
+                        </div>
+                        
+                        <div class="ministry-group">
+                            <div class="position-box minister" onclick="showDetail('justice')">
+                                <div class="position-title">防衛大臣</div>
+                                <div class="position-holder active">村林 琥宙</div>
+                            </div>
+                        </div>
+                        
                         </div>
                     </div>
                 </div>
@@ -475,23 +487,8 @@
                 <div class="org-tree">
                     <div class="position-box judge" onclick="showDetail('court')">
                         <div class="position-title">裁判所</div>
-                        <div class="position-holder vacant">裁判官 募集中</div>
                     </div>
-                    <div class="connector-line"></div>
-                    <div class="position-box judge" onclick="showDetail('chief-judge')">
-                        <div class="position-title">最高裁判所長官</div>
-                        <div class="position-holder vacant">募集中</div>
-                    </div>
-                    <div class="connector-line"></div>
-                    <div class="children-container">
-                        <div class="position-box judge" onclick="showDetail('judge1')">
-                            <div class="position-title">裁判官</div>
-                            <div class="position-holder vacant">募集中</div>
-                        </div>
-                        <div class="position-box judge" onclick="showDetail('judge2')">
-                            <div class="position-title">裁判官</div>
-                            <div class="position-holder vacant">募集中</div>
-                        </div>
+                   
                     </div>
                 </div>
             </div>
@@ -500,23 +497,10 @@
         <h2 class="chart-title" style="margin-top: 60px;">治安機関</h2>
         <div class="org-tree">
             <div class="position-box police" onclick="showDetail('police')">
-                <div class="position-title">警察</div>
-                <div class="position-holder vacant">警察官 募集中</div>
+                <div class="position-title">国家公安委員委員長</div>
+                <div class="position-holder active">大堀 壮介</div>
             </div>
-            <div class="connector-line"></div>
-            <div class="children-container">
-                <div class="position-box police" onclick="showDetail('police-chief')">
-                    <div class="position-title">警察署長</div>
-                    <div class="position-holder vacant">募集中</div>
-                </div>
-                <div class="position-box police" onclick="showDetail('officer1')">
-                    <div class="position-title">警察官</div>
-                    <div class="position-holder vacant">募集中</div>
-                </div>
-                <div class="position-box police" onclick="showDetail('officer2')">
-                    <div class="position-title">警察官</div>
-                    <div class="position-holder vacant">募集中</div>
-                </div>
+
             </div>
         </div>
 
@@ -567,7 +551,7 @@
         'speaker': {
             title: '議長',
             holder: '内閣総理大臣（兼任）',
-            status: 'vacant',
+            status: 'active',
             description: '議会を統括し、会議の進行を司る役職。内閣総理大臣が兼任します。',
             responsibilities: ['議会の招集', '議事の進行', '採決の実施', '議事録の作成・保管', '秩序の維持'],
             powers: ['議事進行権', '発言許可権', '採決権', '秩序罰権'],
@@ -580,57 +564,52 @@
             description: 'サーバー政府の最高責任者。行政全体を統括し、国務大臣を任命し、政策を決定します。',
             responsibilities: ['行政各部の指揮監督', '国務大臣の任命', '議会の招集', '予算案の作成', '法案の提出', '外交の統括', '緊急事態への対応'],
             powers: ['行政権の最高責任者', '国務大臣任免権', '法案提出権', '予算編成権', '緊急命令権'],
-            salary: '月額500通貨',
             term: '議会の信任による（再選可）'
         },
         'finance': {
             title: '財務大臣',
-            holder: '募集中',
+            holder: '大臣：大堀 壮介（おおほり そうすけ）<br>副大臣：後閑 光星（ごかん こうせい）',
             status: 'vacant',
             description: 'サーバーの財政・税制・予算を統括する最重要閣僚。経済の健全性を維持します。',
             responsibilities: ['予算の編成', '税制の立案', '国庫の管理', '通貨政策の実施', '財政報告書の作成', '税務監査の実施'],
             powers: ['予算編成権', '税制改正案提出権', '国庫管理権', '財政調査権'],
-            salary: '月額300通貨',
             term: '総理大臣の指名による',
             bureaus: ['税務局', '予算局', '国庫管理局']
         },
         'justice': {
             title: '法務大臣',
-            holder: '募集中',
-            status: 'vacant',
+            holder: '大臣：梶尾 悠喜（かじお はるゆき）',
+            status: 'active',
             description: '法律の立案・司法制度の管理・人権保護を担当する閣僚。',
             responsibilities: ['法律の立案', '司法制度の整備', '検察の監督', '人権保護', '法制度の調査研究'],
             powers: ['法案提出権', '検察指揮権', '法制調査権'],
-            salary: '月額300通貨',
             term: '総理大臣の指名による',
             bureaus: ['法制局', '検察局']
         },
         'land': {
-            title: '国土交通大臣',
-            holder: '募集中',
-            status: 'vacant',
+            title: '国土開発大臣',
+            holder: '甲斐 風音',
+            status: 'active',
             description: '公共事業・建築・土地管理を統括する閣僚。インフラ整備の責任者。',
             responsibilities: ['公共事業の計画・実施', '建築許可の審査', '土地の管理', '道路・橋梁の整備', '都市計画の策定'],
             powers: ['建築許可権', '公共事業執行権', '土地管理権'],
-            salary: '月額300通貨',
             term: '総理大臣の指名による',
             bureaus: ['公共事業局', '建築許可局', '土地管理局']
         },
         'resource': {
-            title: '資源環境大臣',
-            holder: '募集中',
-            status: 'vacant',
+            title: '環境大臣',
+            holder: '吉高神 司庵（きこうじん しあん）',
+            status: 'active',
             description: '天然資源の管理と環境保護を担当する閣僚。持続可能な開発を推進。',
             responsibilities: ['資源の調査・管理', '採掘の許可・規制', '環境保護活動', '採掘禁止区域の設定', '資源統計の作成'],
             powers: ['採掘許可権', '環境規制権', '資源管理権'],
-            salary: '月額300通貨',
             term: '総理大臣の指名による',
             bureaus: ['資源管理局', '環境保護局', '採掘監督局']
         },
         'court': {
             title: '裁判所',
-            holder: '裁判官 募集中',
-            status: 'vacant',
+            holder: '梶尾 悠喜（かじお はるゆき）<br>甲斐 風音（かい ふうと）',
+            status: 'active',
             description: '司法権を行使し、法の支配を実現する独立機関。',
             responsibilities: ['民事・刑事裁判', '行政訴訟', '憲法判断', '法律の解釈', '判決の執行監督'],
             powers: ['司法権', '違憲審査権', '判決執行権'],
