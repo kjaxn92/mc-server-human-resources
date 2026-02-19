@@ -376,11 +376,11 @@
                     <div class="position-title">財務大臣</div>
                     <div class="position-holder active">大堀 壮介</div>
                 </div>
-                <div class="position-card minister" onclick="showDetail('environment')">
+                <div class="position-card minister" onclick="showDetail('tax')">
                     <div class="position-title">税務大臣</div>
                     <div class="position-holder active">加藤 優人</div>
                 </div>
-                <div class="position-card minister" onclick="showDetail('environment')">
+                <div class="position-card minister" onclick="showDetail('law')">
                     <div class="position-title">法務大臣</div>
                     <div class="position-holder active">梶尾 悠喜</div>
                 </div>
@@ -388,7 +388,7 @@
                     <div class="position-title">環境大臣</div>
                     <div class="position-holder active">吉高神 司庵</div>
                 </div>
-                  <div class="position-card minister" onclick="showDetail('land')">
+                  <div class="position-card minister" onclick="showDetail('city')">
                     <div class="position-title">国土開発大臣</div>
                     <div class="position-holder active">甲斐 風音</div>
                 </div>
@@ -396,7 +396,7 @@
                     <div class="position-title">国土管理保全大臣</div>
                     <div class="position-holder active">宮崎 将光</div>
                 </div>
-                  <div class="position-card minister" onclick="showDetail('land')">
+                  <div class="position-card minister" onclick="showDetail('protect')">
                     <div class="position-title">防衛大臣</div>
                     <div class="position-holder active">村林 琥宙</div>
                 </div>
@@ -473,7 +473,7 @@
         'speaker': {
             title: '議長',
             holder: '内閣総理大臣（兼任）',
-            status: 'vacant',
+            status: 'active',
             description: '議会を統括し、会議の進行を司る役職。内閣総理大臣が兼任します。',
             responsibilities: ['議会の招集', '議事の進行', '採決の実施', '議事録の作成・保管', '秩序の維持'],
             powers: ['議事進行権', '発言許可権', '採決権', '秩序罰権'],
@@ -481,7 +481,7 @@
         },
         'prime-minister': {
             title: '内閣総理大臣',
-            holder: '小島 亮太（こじま りょうた）',
+            holder: '大臣：小島 亮太（こじま りょうた）副大臣：後閑 光星（ごかん こうせい）',
             status: 'active',
             description: 'サーバー政府の最高責任者。行政全体を統括し、国務大臣を任命し、政策を決定します。',
             responsibilities: ['行政各部の指揮監督', '国務大臣の任命', '議会の招集', '予算案の作成', '法案の提出', '外交の統括', '緊急事態への対応'],
@@ -493,77 +493,102 @@
             title: '財務大臣',
             holder: '大臣：大堀 壮介（おおほり そうすけ）<br>副大臣：後閑 光星（ごかん こうせい）',
             status: 'active',
-            description: 'サーバーの財政・税制・予算を統括する最重要閣僚。経済の健全性を維持します。',
-            responsibilities: ['税金の徴収・管理', '予算の編成', '国庫の管理', '通貨政策の実施', '財政報告書の作成', '税務監査の実施'],
-            areas: ['税務（税金関係）', '予算（予算編成）', '国庫（お金の管理）', '通貨政策（インフレ対策）'],
-            powers: ['予算編成権', '税制改正案提出権', '国庫管理権', '財政調査権'],
+            description: 'サーバーの財政・予算を統括する最重要閣僚。経済の健全性を維持します。',
+            responsibilities: ['予算の編成', '国庫の管理', '通貨政策の実施', '財政報告書の作成', '税務監査の実施'],
+            areas: ['予算（予算編成）', '国庫（お金の管理）', '通貨政策（インフレ対策）'],
+            powers: ['予算編成権', '国庫管理権', '財政調査権'],
             term: '総理大臣の指名による',
             note: '現在は大臣が直接担当。将来的に人員が増えた場合、各分野に局長を配置予定。'
         },
-        'land': {
+        'city': {
             title: '国土開発大臣',
             holder: '甲斐 風音（かいふうと）',
             status: 'active',
-            description: '公共事業・建築・土地管理を統括する閣僚。インフラ整備と国土の適切な管理を担当します。',
-            responsibilities: ['公共事業の計画・実施', '建築許可の審査', '土地の管理・登記', '道路・橋梁の整備', '都市計画の策定', '土地開拓の許可'],
-            areas: ['公共事業（道路・橋など）', '建築許可（建築審査）', '土地管理（登記・境界）', '都市計画（開発計画）'],
-            powers: ['建築許可権', '公共事業執行権', '土地管理権', '開拓許可権'],
+            description: '都市計画を管理する閣僚。インフラ整備を担当します。',
+            responsibilities: ['公共事業の計画・実施', '道路・橋梁の整備', '都市計画の策定'],
+            areas: ['公共事業（道路・橋など）', '都市計画（開発計画）'],
+            powers: ['公共事業執行権', '公共施設管理権'],
             term: '総理大臣の指名による',
-            note: '国土開発と国土管理保全を統合した省。現在は大臣が直接担当。'
+            note: '国土管理を分割した省。現在は大臣が直接担当。'
         },
         'environment': {
-            title: '環境防衛大臣',
-            holder: '募集中',
-            status: 'vacant',
+            title: '環境大臣',
+            holder: '吉高神 司庵（きこうじん しあん）',
+            status: 'active',
+            description: '環境保護・資源管理・領土防衛を担当する閣僚。持続可能な開発と領土の保全を推進します。',
+            responsibilities: ['資源の調査・管理', '採掘の許可・規制', '環境保護活動', '採掘禁止区域の設定', '違法採掘の取締り', '領土の防衛・監視'],
+            areas: ['環境保護（自然保護）', '資源管理（採掘管理）', '採掘監督（許可・取締）'],
+            powers: ['採掘許可権', '環境規制権', '資源管理権', '保護区設定権'],
+            term: '総理大臣の指名による',
+            note: '環境大臣と防衛大臣を統合。環境破壊防止と領土防衛は密接に関連。'
+        },
+          'law': {
+            title: '法務大臣',
+            holder: '梶尾 悠喜（かじお はるゆき）',
+            status: 'active',
             description: '環境保護・資源管理・領土防衛を担当する閣僚。持続可能な開発と領土の保全を推進します。',
             responsibilities: ['資源の調査・管理', '採掘の許可・規制', '環境保護活動', '採掘禁止区域の設定', '違法採掘の取締り', '領土の防衛・監視'],
             areas: ['環境保護（自然保護）', '資源管理（採掘管理）', '採掘監督（許可・取締）', '防衛（領土保全）'],
             powers: ['採掘許可権', '環境規制権', '資源管理権', '保護区設定権'],
             term: '総理大臣の指名による',
+            note: '環境防衛大臣を分割。環境破壊防止と領土防衛は密接に関連。'
+        },
+          'tax': {
+            title: '税務大臣',
+            holder: '加藤 優人（かとう ゆうと）',
+            status: 'active',
+            description: '環境保護・資源管理・領土防衛を担当する閣僚。持続可能な開発と領土の保全を推進します。',
+            responsibilities: ['税金の徴収・管理', '税務監査の実施', '税制度の立案'],
+            areas: ['税務（税金関係）'],
+            powers: ['税制改正案提出権', '税務調査権', ],
+            term: '総理大臣の指名による',
             note: '環境大臣と防衛大臣を統合。環境破壊防止と領土防衛は密接に関連。'
+        },
+          'land': {
+            title: '環境大臣',
+            holder: '宮崎 将光（みやざき まさみつ）',
+            status: 'active',
+            description: '景観保護・土地管理を担当する閣僚。持続可能な開発と領土の保全を推進します。',
+            responsibilities: '環境保護活動', '建築許可の審査', '土地の管理・登記', '領土の防衛・監視', '土地開拓の許可', '建築監督', '土地の整備'],
+            areas: ['環境保護（自然保護）', '防衛（領土保全）', '建築許可（建築審査）', '土地管理（登記・境界）', '景観保護（土地整備）'],
+            powers: ['建築許可権', '外観規制権', '土地管理権', '開拓許可権', '行政指導権'],
+            term: '総理大臣の指名による',
+            note: '国土管理を分割した省。現在は大臣が直接担当。'
+        },
+          'protect': {
+            title: '防衛大臣',
+            holder: '村林 琥宙（むらばやし こう）',
+            status: 'active',
+            description: '領土防衛を担当する閣僚。領土の安全を推進します。',
+            responsibilities: ['領土の防衛・監視', '土地の湧きつぶし・モンスター対策の監督'],
+            areas: ['環境保護（自然保護）', '資源管理（採掘管理）', '採掘監督（許可・取締）', '防衛（領土保全）'],
+            powers: ['採掘許可権', '環境規制権', '資源管理権', '保護区設定権'],
+            term: '総理大臣の指名による',
+            note: '環境防衛大臣を分割。環境破壊防止と領土防衛は密接に関連。'
         },
         'police-chief': {
             title: '国家公安委員長',
-            holder: '募集中',
-            status: 'vacant',
+            holder: '大堀 壮介（おおほり そうすけ）',
+            status: 'active',
             description: '警察組織を監督する独立機関の長。治安政策を決定し、警察の中立性を確保します。',
             responsibilities: ['警察の監督', '治安政策の決定', '警察人事の承認', '重大事件への対応方針', '警察活動の評価'],
             powers: ['警察監督権', '治安政策決定権', '人事承認権'],
             term: '総理大臣の任命、議会の承認',
             note: '警察から独立した立場で監督を行い、政治的中立性を確保。'
         },
-        'police-captain': {
-            title: '警察署長',
-            holder: '募集中',
-            status: 'vacant',
-            description: '警察組織の現場責任者。警察官を指揮し、日々の治安維持活動を統括します。',
-            responsibilities: ['警察官の指揮', '事件の捜査指揮', 'パトロール計画', '重大事件の対応', '国家公安委員長への報告'],
-            powers: ['警察指揮権', '捜査指揮権', '逮捕権'],
-            term: '国家公安委員長の任命'
-        },
-        'officer': {
-            title: '警察官',
-            holder: '募集中',
-            status: 'vacant',
-            description: 'パトロール・捜査・取締りを行う治安の最前線。',
-            responsibilities: ['パトロール活動', '犯罪の捜査', '証拠の収集', '被疑者の逮捕', '被害者保護', '報告書の作成'],
-            powers: ['捜査権', '質問権', '証拠収集権', '逮捕権（重大事件）'],
-            equipment: ['装備一式支給', 'エリトラ貸与（パトロール用）']
-        },
-        'chief-judge': {
-            title: '最高裁判所長官',
-            holder: '募集中',
-            status: 'vacant',
-            description: '裁判所の最高責任者。司法の独立を守り、裁判の公正を確保します。',
-            responsibilities: ['裁判所の統括', '重要事件の審理', '司法の独立の確保', '裁判官の指導', '法律の解釈'],
-            powers: ['司法行政権', '裁判権', '違憲審査権'],
-            term: '議会の承認による（身分保障あり）',
-            note: '行政府・立法府から完全に独立。罷免には議会の2/3以上の賛成が必要。'
-        },
         'judge': {
             title: '裁判官',
-            holder: '募集中',
-            status: 'vacant',
+            holder: '梶尾 悠喜（かじお はるゆき）<br>甲斐 風音（かい ふうと）',
+            status: 'active',
+            description: '民事・刑事事件を審理し、公正な判決を下します。',
+            responsibilities: ['事件の審理', '判決の作成', '法律の解釈', '証拠の評価', '裁判の公開'],
+            powers: ['裁判権', '証拠評価権', '判決権'],
+            term: '議会の承認、身分保障あり'
+               },
+        'defense': {
+            title: '国選弁護人',
+            holder: '吉高神 司庵（きこうじん しあん）',
+            status: 'active',
             description: '民事・刑事事件を審理し、公正な判決を下します。',
             responsibilities: ['事件の審理', '判決の作成', '法律の解釈', '証拠の評価', '裁判の公開'],
             powers: ['裁判権', '証拠評価権', '判決権'],
