@@ -414,12 +414,14 @@
          
         <div class="section">
             <div class="section-title">司法府</div>
-            </div>
-            <div class="connector">↓</div>
             <div class="cards-container">
                 <div class="position-card judicial" onclick="showDetail('judge')">
                     <div class="position-title">裁判官</div>
-                    <div class="position-holder vacant"></div>
+                    <div class="position-holder active"></div>
+                </div>
+                     <div class="position-card judicial" onclick="showDetail('defense')">
+                    <div class="position-title">国選弁護人</div>
+                    <div class="position-holder active">吉高神 司庵</div>
                 </div>
             </div>
         </div>
@@ -479,8 +481,8 @@
         },
         'prime-minister': {
             title: '内閣総理大臣',
-            holder: '募集中',
-            status: 'vacant',
+            holder: '小島 亮太（こじま りょうた）',
+            status: 'active',
             description: 'サーバー政府の最高責任者。行政全体を統括し、国務大臣を任命し、政策を決定します。',
             responsibilities: ['行政各部の指揮監督', '国務大臣の任命', '議会の招集', '予算案の作成', '法案の提出', '外交の統括', '緊急事態への対応'],
             powers: ['行政権の最高責任者', '国務大臣任免権', '法案提出権', '予算編成権', '緊急命令権'],
@@ -489,8 +491,8 @@
         },
         'finance': {
             title: '財務大臣',
-            holder: '募集中',
-            status: 'vacant',
+            holder: '大臣：大堀 壮介（おおほり そうすけ）<br>副大臣：後閑 光星（ごかん こうせい）',
+            status: 'active',
             description: 'サーバーの財政・税制・予算を統括する最重要閣僚。経済の健全性を維持します。',
             responsibilities: ['税金の徴収・管理', '予算の編成', '国庫の管理', '通貨政策の実施', '財政報告書の作成', '税務監査の実施'],
             areas: ['税務（税金関係）', '予算（予算編成）', '国庫（お金の管理）', '通貨政策（インフレ対策）'],
@@ -499,9 +501,9 @@
             note: '現在は大臣が直接担当。将来的に人員が増えた場合、各分野に局長を配置予定。'
         },
         'land': {
-            title: '国土交通大臣',
-            holder: '募集中',
-            status: 'vacant',
+            title: '国土開発大臣',
+            holder: '甲斐 風音（かいふうと）',
+            status: 'active',
             description: '公共事業・建築・土地管理を統括する閣僚。インフラ整備と国土の適切な管理を担当します。',
             responsibilities: ['公共事業の計画・実施', '建築許可の審査', '土地の管理・登記', '道路・橋梁の整備', '都市計画の策定', '土地開拓の許可'],
             areas: ['公共事業（道路・橋など）', '建築許可（建築審査）', '土地管理（登記・境界）', '都市計画（開発計画）'],
