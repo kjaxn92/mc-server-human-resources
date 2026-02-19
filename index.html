@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>政府組織図 - サーバー政府</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+```
+    html {
+        font-size: 16px;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif;
+        background-color: #f5f7fa;
+        min-height: 100vh;
+        color: #2d3748;
+        padding: 20px;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    header {
+        text-align: center;
+        padding: 60px 20px;
+        margin-bottom: 40px;
+    }
+
+    header h1 {
+        font-size: 3em;
+        font-weight: 800;
+        margin-bottom: 15px;
+        color: #1a202c;
+    }
+
+    header p {
+        font-size: 1.1em;
+        color: #718096;
+    }
+
+    .org-chart {
+        background-color: #ffffff;
+        border-radius: 16px;
+        padding: 50px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        margin-bottom: 40px;
+    }
+
+    .section-title {
+        text-align: center;
+        font-size: 1.5em;
+        font-weight: 700;
+        color: #2d3748;
+        margin-bottom: 40px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #e2e8f0;
+    }
+
+    .section {
+        margin-bottom: 60px;
+    }
+
+    .cards-container {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin-bottom: 30px;
+    }
+
+    .position-card {
+        background-color: #ffffff;
+        border-width: 2px;
+        border-style: solid;
+        border-color: #e2e8f0;
+        border-radius: 12px;
+        padding: 24px 32px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        width: 220px;
+        text-align: center;
+    }
+
+    .position-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    .position-card.prime {
+        background-color: #667eea;
+        background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-color: #667eea;
+        color: white;
+    }
+
+    .position-card.minister {
+        background-color: #4299e1;
+        border-color: #4299e1;
+        color: white;
+    }
+
+    .position-card.security {
+        background-color: #48bb78;
+        border-color: #48bb78;
+        color: white;
+    }
+
+    .position-card.judicial {
+        background-color: #ed8936;
+        border-color: #ed8936;
+        color: white;
+    }
+
+    .position-title {
+        font-weight: 700;
+        font-size: 1.15em;
+        margin-bottom: 8px;
+    }
+
+    .position-holder {
+        font-size: 0.9em;
+        opacity: 0.9;
+    }
+
+    .position-holder.vacant {
+        font-style: italic;
+    }
+
+    .connector {
+        text-align: center;
+        color: #cbd5e0;
+        font-size: 2em;
+        margin: 10px 0;
+    }
+
+    .detail-panel {
+        position: fixed;
+        top: 0;
+        right: -600px;
+        width: 600px;
+        height: 100vh;
+        background-color: #ffffff;
+        box-shadow: -4px 0 16px rgba(0, 0, 0, 0.1);
+        transition: right 0.3s ease;
+        z-index: 1000;
+        overflow-y: auto;
+    }
+
+    .detail-panel.active {
+        right: 0;
+    }
+
+    .detail-header {
+        background-color: #667eea;
+        background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 40px;
+        position: relative;
+    }
+
+    .detail-header h2 {
+        font-size: 2em;
+        font-weight: 700;
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 30px;
+        right: 30px;
+        background-color: rgba(255,255,255,0.2);
+        border: none;
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 1.5em;
+        transition: all 0.2s ease;
+    }
+
+    .close-btn:hover {
+        background-color: rgba(255,255,255,0.3);
+    }
+
+    .detail-content {
+        padding: 40px;
+        padding-bottom: 100px;
+    }
+
+    .detail-section {
+        margin-bottom: 30px;
+    }
+
+    .detail-section h3 {
+        color: #2d3748;
+        margin-bottom: 15px;
+        font-size: 1.3em;
+        font-weight: 700;
+    }
+
+    .detail-section p {
+        color: #4a5568;
+        line-height: 1.7;
+    }
+
+    .detail-section ul {
+        list-style: none;
+        padding-left: 0;
+    }
+
+    .detail-section li {
+        padding: 10px 0;
+        padding-left: 30px;
+        position: relative;
+        color: #4a5568;
+    }
+
+    .detail-section li:before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: #48bb78;
+        font-weight: 700;
+    }
+
+    .status-badge {
+        display: inline-block;
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-size: 0.85em;
+        font-weight: 600;
+        margin-top: 10px;
+    }
+
+    .status-active {
+        background-color: #c6f6d5;
+        color: #22543d;
+    }
+
+    .status-vacant {
+        background-color: #fed7d7;
+        color: #742a2a;
+    }
+
+    .info-box {
+        background-color: #edf2f7;
+        border-left-width: 4px;
+        border-left-style: solid;
+        border-left-color: #4299e1;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 20px 0;
+    }
+
+    .info-box-title {
+        font-weight: 700;
+        color: #2d3748;
+        margin-bottom: 10px;
+    }
+
+    .legend {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin-top: 50px;
+        flex-wrap: wrap;
+    }
+
+    .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .legend-box {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+    }
+
+    .legend-box.prime {
+        background-color: #667eea;
+        background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .legend-box.minister {
+        background-color: #4299e1;
+    }
+
+    .legend-box.security {
+        background-color: #48bb78;
+    }
+
+    .legend-box.judicial {
+        background-color: #ed8936;
+    }
+
+    footer {
+        text-align: center;
+        padding: 40px;
+        padding-bottom: 100px;
+        color: #718096;
+    }
+
+    @media (max-width: 768px) {
+        header h1 {
+            font-size: 2em;
+        }
+
+        .org-chart {
+            padding: 30px 20px;
+        }
+
+        .detail-panel {
+            width: 100%;
+            right: -100%;
+        }
+
+        .position-card {
+            width: 100%;
+        }
+    }
+</style>
+```
+
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>政府組織図</h1>
+            <p>Government Organizational Chart</p>
+        </header>
+
+```
+    <div class="org-chart">
+        <div class="section">
+            <div class="section-title">立法府</div>
+            <div class="cards-container">
+                <div class="position-card" onclick="showDetail('parliament')">
+                    <div class="position-title">議会</div>
+                    <div class="position-holder">全メンバー参加</div>
+                </div>
+            </div>
+            <div class="connector">↓</div>
+            <div class="cards-container">
+                <div class="position-card" onclick="showDetail('speaker')">
+                    <div class="position-title">議長</div>
+                    <div class="position-holder">総理大臣（兼任）</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">行政府</div>
+            <div class="cards-container">
+                <div class="position-card prime" onclick="showDetail('prime-minister')">
+                    <div class="position-title">内閣総理大臣</div>
+                    <div class="position-holder vacant">募集中</div>
+                </div>
+            </div>
+            <div class="connector">↓</div>
+            <div class="cards-container">
+                <div class="position-card minister" onclick="showDetail('finance')">
+                    <div class="position-title">財務大臣</div>
+                    <div class="position-holder vacant">募集中</div>
+                </div>
+                <div class="position-card minister" onclick="showDetail('land')">
+                    <div class="position-title">国土交通大臣</div>
+                    <div class="position-holder vacant">募集中</div>
+                </div>
+                <div class="position-card minister" onclick="showDetail('environment')">
+                    <div class="position-title">環境防衛大臣</div>
+                    <div class="position-holder vacant">募集中</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">治安機関</div>
+            <div class="cards-container">
+                <div class="position-card security" onclick="showDetail('police-chief')">
+                    <div class="position-title">国家公安委員長</div>
+                    <div class="position-holder vacant">募集中</div>
+                </div>
+            </div>
+            <div class="connector">↓</div>
+            <div class="cards-container">
+                <div class="position-card security" onclick="showDetail('police-captain')">
+                    <div class="position-title">警察署長</div>
+                    <div class="position-holder vacant">募集中</div>
+                </div>
+                <div class="position-card security" onclick="showDetail('officer')">
+                    <div class="position-title">警察官</div>
+                    <div class="position-holder vacant">募集中</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">司法府</div>
+            <div class="cards-container">
+                <div class="position-card judicial" onclick="showDetail('chief-judge')">
+                    <div class="position-title">最高裁判所長官</div>
+                    <div class="position-holder vacant">募集中</div>
+                </div>
+            </div>
+            <div class="connector">↓</div>
+            <div class="cards-container">
+                <div class="position-card judicial" onclick="showDetail('judge')">
+                    <div class="position-title">裁判官</div>
+                    <div class="position-holder vacant">募集中</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-box prime"></div>
+                <span>内閣総理大臣</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box minister"></div>
+                <span>国務大臣</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box security"></div>
+                <span>治安関係</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box judicial"></div>
+                <span>司法関係</span>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 サーバー政府 | 組織図は随時更新されます</p>
+    </footer>
+</div>
+
+<div class="detail-panel" id="detailPanel">
+    <div class="detail-header">
+        <button class="close-btn" onclick="closeDetail()">×</button>
+        <h2 id="detailTitle">役職詳細</h2>
+    </div>
+    <div class="detail-content" id="detailContent"></div>
+</div>
+
+<script type="text/javascript">
+    var positionData = {
+        'parliament': {
+            title: '議会',
+            holder: '全メンバー参加',
+            status: 'active',
+            description: 'サーバーの最高意思決定機関。全メンバーが参加し、法律の制定・改正、予算の議決、重要事項の決定を行います。',
+            responsibilities: ['法律の制定・改正・廃止', '予算の議決', '内閣総理大臣の指名', '国務大臣の承認', '裁判官の任命承認', '重要事項の決議'],
+            powers: ['立法権', '予算議決権', '人事承認権', '行政監視権'],
+            term: '常設機関'
+        },
+        'speaker': {
+            title: '議長',
+            holder: '内閣総理大臣（兼任）',
+            status: 'vacant',
+            description: '議会を統括し、会議の進行を司る役職。内閣総理大臣が兼任します。',
+            responsibilities: ['議会の招集', '議事の進行', '採決の実施', '議事録の作成・保管', '秩序の維持'],
+            powers: ['議事進行権', '発言許可権', '採決権', '秩序罰権'],
+            term: '総理大臣の任期に準ずる'
+        },
+        'prime-minister': {
+            title: '内閣総理大臣',
+            holder: '募集中',
+            status: 'vacant',
+            description: 'サーバー政府の最高責任者。行政全体を統括し、国務大臣を任命し、政策を決定します。',
+            responsibilities: ['行政各部の指揮監督', '国務大臣の任命', '議会の招集', '予算案の作成', '法案の提出', '外交の統括', '緊急事態への対応'],
+            powers: ['行政権の最高責任者', '国務大臣任免権', '法案提出権', '予算編成権', '緊急命令権'],
+            term: '議会の信任による（再選可）',
+            note: '強いリーダーシップと公平な判断力が求められる最重要ポスト。'
+        },
+        'finance': {
+            title: '財務大臣',
+            holder: '募集中',
+            status: 'vacant',
+            description: 'サーバーの財政・税制・予算を統括する最重要閣僚。経済の健全性を維持します。',
+            responsibilities: ['税金の徴収・管理', '予算の編成', '国庫の管理', '通貨政策の実施', '財政報告書の作成', '税務監査の実施'],
+            areas: ['税務（税金関係）', '予算（予算編成）', '国庫（お金の管理）', '通貨政策（インフレ対策）'],
+            powers: ['予算編成権', '税制改正案提出権', '国庫管理権', '財政調査権'],
+            term: '総理大臣の指名による',
+            note: '現在は大臣が直接担当。将来的に人員が増えた場合、各分野に局長を配置予定。'
+        },
+        'land': {
+            title: '国土交通大臣',
+            holder: '募集中',
+            status: 'vacant',
+            description: '公共事業・建築・土地管理を統括する閣僚。インフラ整備と国土の適切な管理を担当します。',
+            responsibilities: ['公共事業の計画・実施', '建築許可の審査', '土地の管理・登記', '道路・橋梁の整備', '都市計画の策定', '土地開拓の許可'],
+            areas: ['公共事業（道路・橋など）', '建築許可（建築審査）', '土地管理（登記・境界）', '都市計画（開発計画）'],
+            powers: ['建築許可権', '公共事業執行権', '土地管理権', '開拓許可権'],
+            term: '総理大臣の指名による',
+            note: '国土開発と国土管理保全を統合した省。現在は大臣が直接担当。'
+        },
+        'environment': {
+            title: '環境防衛大臣',
+            holder: '募集中',
+            status: 'vacant',
+            description: '環境保護・資源管理・領土防衛を担当する閣僚。持続可能な開発と領土の保全を推進します。',
+            responsibilities: ['資源の調査・管理', '採掘の許可・規制', '環境保護活動', '採掘禁止区域の設定', '違法採掘の取締り', '領土の防衛・監視'],
+            areas: ['環境保護（自然保護）', '資源管理（採掘管理）', '採掘監督（許可・取締）', '防衛（領土保全）'],
+            powers: ['採掘許可権', '環境規制権', '資源管理権', '保護区設定権'],
+            term: '総理大臣の指名による',
+            note: '環境大臣と防衛大臣を統合。環境破壊防止と領土防衛は密接に関連。'
+        },
+        'police-chief': {
+            title: '国家公安委員長',
+            holder: '募集中',
+            status: 'vacant',
+            description: '警察組織を監督する独立機関の長。治安政策を決定し、警察の中立性を確保します。',
+            responsibilities: ['警察の監督', '治安政策の決定', '警察人事の承認', '重大事件への対応方針', '警察活動の評価'],
+            powers: ['警察監督権', '治安政策決定権', '人事承認権'],
+            term: '総理大臣の任命、議会の承認',
+            note: '警察から独立した立場で監督を行い、政治的中立性を確保。'
+        },
+        'police-captain': {
+            title: '警察署長',
+            holder: '募集中',
+            status: 'vacant',
+            description: '警察組織の現場責任者。警察官を指揮し、日々の治安維持活動を統括します。',
+            responsibilities: ['警察官の指揮', '事件の捜査指揮', 'パトロール計画', '重大事件の対応', '国家公安委員長への報告'],
+            powers: ['警察指揮権', '捜査指揮権', '逮捕権'],
+            term: '国家公安委員長の任命'
+        },
+        'officer': {
+            title: '警察官',
+            holder: '募集中',
+            status: 'vacant',
+            description: 'パトロール・捜査・取締りを行う治安の最前線。',
+            responsibilities: ['パトロール活動', '犯罪の捜査', '証拠の収集', '被疑者の逮捕', '被害者保護', '報告書の作成'],
+            powers: ['捜査権', '質問権', '証拠収集権', '逮捕権（重大事件）'],
+            equipment: ['装備一式支給', 'エリトラ貸与（パトロール用）']
+        },
+        'chief-judge': {
+            title: '最高裁判所長官',
+            holder: '募集中',
+            status: 'vacant',
+            description: '裁判所の最高責任者。司法の独立を守り、裁判の公正を確保します。',
+            responsibilities: ['裁判所の統括', '重要事件の審理', '司法の独立の確保', '裁判官の指導', '法律の解釈'],
+            powers: ['司法行政権', '裁判権', '違憲審査権'],
+            term: '議会の承認による（身分保障あり）',
+            note: '行政府・立法府から完全に独立。罷免には議会の2/3以上の賛成が必要。'
+        },
+        'judge': {
+            title: '裁判官',
+            holder: '募集中',
+            status: 'vacant',
+            description: '民事・刑事事件を審理し、公正な判決を下します。',
+            responsibilities: ['事件の審理', '判決の作成', '法律の解釈', '証拠の評価', '裁判の公開'],
+            powers: ['裁判権', '証拠評価権', '判決権'],
+            term: '議会の承認、身分保障あり'
+        }
+    };
+
+    function showDetail(positionId) {
+        var data = positionData[positionId];
+        if (!data) return;
+
+        document.getElementById('detailTitle').textContent = data.title;
+        
+        var content = '';
+
+        if (data.holder) {
+            content += '<div class="detail-section">';
+            content += '<h3>現職者</h3>';
+            content += '<p>' + data.holder + '</p>';
+            var statusClass = data.status === 'active' ? 'status-active' : 'status-vacant';
+            var statusText = data.status === 'active' ? '在職中' : '募集中';
+            content += '<span class="status-badge ' + statusClass + '">' + statusText + '</span>';
+            content += '</div>';
+        }
+
+        if (data.description) {
+            content += '<div class="detail-section">';
+            content += '<h3>概要</h3>';
+            content += '<p>' + data.description + '</p>';
+            content += '</div>';
+        }
+
+        if (data.responsibilities) {
+            content += '<div class="detail-section">';
+            content += '<h3>主な職務</h3>';
+            content += '<ul>';
+            for (var i = 0; i < data.responsibilities.length; i++) {
+                content += '<li>' + data.responsibilities[i] + '</li>';
+            }
+            content += '</ul></div>';
+        }
+
+        if (data.areas) {
+            content += '<div class="info-box">';
+            content += '<div class="info-box-title">担当分野</div>';
+            content += '<ul style="margin-top: 10px;">';
+            for (var i = 0; i < data.areas.length; i++) {
+                content += '<li>' + data.areas[i] + '</li>';
+            }
+            content += '</ul></div>';
+        }
+
+        if (data.powers) {
+            content += '<div class="detail-section">';
+            content += '<h3>権限</h3>';
+            content += '<ul>';
+            for (var i = 0; i < data.powers.length; i++) {
+                content += '<li>' + data.powers[i] + '</li>';
+            }
+            content += '</ul></div>';
+        }
+
+        if (data.equipment) {
+            content += '<div class="detail-section">';
+            content += '<h3>支給品</h3>';
+            content += '<ul>';
+            for (var i = 0; i < data.equipment.length; i++) {
+                content += '<li>' + data.equipment[i] + '</li>';
+            }
+            content += '</ul></div>';
+        }
+
+        if (data.term) {
+            content += '<div class="detail-section">';
+            content += '<h3>任期</h3>';
+            content += '<p>' + data.term + '</p>';
+            content += '</div>';
+        }
+
+        if (data.note) {
+            content += '<div class="info-box">';
+            content += '<div class="info-box-title">備考</div>';
+            content += '<p style="margin-top: 10px;">' + data.note + '</p>';
+            content += '</div>';
+        }
+
+        document.getElementById('detailContent').innerHTML = content;
+        document.getElementById('detailPanel').classList.add('active');
+    }
+
+    function closeDetail() {
+        document.getElementById('detailPanel').classList.remove('active');
+    }
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeDetail();
+        }
+    });
+</script>
+```
+
+</body>
+</html>
